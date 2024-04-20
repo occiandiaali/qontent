@@ -1,9 +1,14 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:supabase_teleprompter/custom_widgets/script_overlay.dart';
 import 'package:supabase_teleprompter/main.dart';
 import 'package:supabase_teleprompter/video_page.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -16,6 +21,7 @@ class _CameraPageState extends State<CameraPage> {
   bool _isLoading = true;
   bool _isRecording = false;
   late CameraController _cameraController;
+  //final isDialOpen = ValueNotifier(false);
 
   @override
   void initState() {
@@ -59,6 +65,32 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    String val = '''
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+''';
     if (_isLoading) {
       return Container(
         color: Colors.white,
@@ -71,7 +103,23 @@ class _CameraPageState extends State<CameraPage> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            CameraPreview(_cameraController),
+            CameraPreview(
+                _cameraController,
+              child: Offstage(
+                offstage: !_isRecording,
+                // child: TextScroll(
+                //   val,
+                //   mode: TextScrollMode.endless,
+                //   velocity: const Velocity(pixelsPerSecond: Offset(150,0)),
+                //   delayBefore: const Duration(milliseconds: 500),
+                //   numberOfReps: 5,
+                //   pauseBetween: const Duration(milliseconds: 50),
+                //   style: const TextStyle(
+                //       color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 38),
+                // )
+                child: const ScriptOverlay(),
+              ),
+            ),
             Positioned(
               left: MediaQuery.of(context).size.width / 3,
               child: Row(
@@ -85,10 +133,37 @@ class _CameraPageState extends State<CameraPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(25),
-                    child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      child: Icon(_isRecording ? Icons.stop : Icons.circle),
-                      onPressed: () => _recordVideo(),
+                    // child: FloatingActionButton(
+                    //   backgroundColor: Colors.red,
+                    //   child: Icon(_isRecording ? Icons.stop : Icons.circle),
+                    //   onPressed: () => _recordVideo(),
+                    // ),
+                    child: SpeedDial(
+                      animatedIcon: AnimatedIcons.menu_close,
+                      backgroundColor: Colors.pinkAccent,
+                      overlayColor: Colors.black,
+                      overlayOpacity: 0.4,
+                      spacing: 10,
+                    //  openCloseDial: isDialOpen,
+                      children: [
+                        SpeedDialChild(
+                          child: Icon(_isRecording ? Icons.stop : Icons.video_camera_front_outlined),
+                          label: _isRecording ? 'Stop video' : 'Record video',
+                          backgroundColor: Colors.red,
+                          onTap: () => _recordVideo(),
+                        ),
+                        SpeedDialChild(
+                          child: const Icon(Icons.file_open_sharp),
+                          label: 'Add script',
+                          backgroundColor: Colors.green,
+                        ),
+                        SpeedDialChild(
+                            child: const Icon(Icons.delete_outline),
+                            label: 'Remove script',
+                          backgroundColor: Colors.deepOrange,
+                          onTap: () {},
+                        ),
+                      ],
                     ),
                   )
                 ],
