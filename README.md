@@ -1,8 +1,10 @@
-# qontent  
+# Q. is for qontent  
 
 ## Logo  
+<img src="https://github.com/occiandiaali/qontent/assets/40769994/43ce1a37-bc9f-466a-841e-d8c71992ae90.jpg" width="240">  
 
-<img src="https://github.com/occiandiaali/qontent/assets/40769994/176f6e6b-100a-4170-bd09-7caafd876a04.jpg" width="240">
+<img src="https://github.com/occiandiaali/qontent/assets/40769994/3683107a-4dd1-4c5a-93da-661166dd4e49.jpg" width="240"> 
+
 
 A new Flutter project.
 
