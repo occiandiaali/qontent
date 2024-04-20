@@ -1,10 +1,14 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:supabase_teleprompter/custom_widgets/script_overlay.dart';
 import 'package:supabase_teleprompter/main.dart';
 import 'package:supabase_teleprompter/video_page.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -61,6 +65,32 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    String val = '''
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+bunch of text here bunch of text here
+''';
     if (_isLoading) {
       return Container(
         color: Colors.white,
@@ -73,9 +103,25 @@ class _CameraPageState extends State<CameraPage> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            CameraPreview(_cameraController),
+            CameraPreview(
+                _cameraController,
+              child: Offstage(
+                offstage: !_isRecording,
+                // child: TextScroll(
+                //   val,
+                //   mode: TextScrollMode.endless,
+                //   velocity: const Velocity(pixelsPerSecond: Offset(150,0)),
+                //   delayBefore: const Duration(milliseconds: 500),
+                //   numberOfReps: 5,
+                //   pauseBetween: const Duration(milliseconds: 50),
+                //   style: const TextStyle(
+                //       color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 38),
+                // )
+                child: const ScriptOverlay(),
+              ),
+            ),
             Positioned(
-              left: MediaQuery.of(context).size.width / 2.6,
+              left: MediaQuery.of(context).size.width / 3,
               child: Row(
                 children: [
                   GestureDetector(
