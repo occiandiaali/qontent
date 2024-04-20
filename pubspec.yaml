@@ -33,6 +33,7 @@ dependencies:
   camera:
   video_player:
   text_scroll:
+  flutter_speed_dial: ^7.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
