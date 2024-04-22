@@ -52,7 +52,13 @@ class _CameraPageState extends State<CameraPage> {
     pickDoc();
     final PdfDocument document =
         PdfDocument(inputBytes: File(_pickedFilePath).readAsBytesSync());
-    videoScript = PdfTextExtractor(document).extractText();
+    if (videoScript.isEmpty) {
+      videoScript = PdfTextExtractor(document).extractText();
+    } else {
+      setState(() {
+        videoScript = '';
+      });
+    }
     document.dispose();
   }
 

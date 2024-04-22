@@ -1,10 +1,11 @@
 import 'dart:io';
 
-//import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_teleprompter/video_edit_page.dart';
 import 'package:video_player/video_player.dart';
 import 'package:share_extend/share_extend.dart';
+import 'package:video_editor/video_editor.dart';
 
 class VideoPage extends StatefulWidget {
   final String filePath;
@@ -18,7 +19,7 @@ class _VideoPageState extends State<VideoPage> {
   late VideoPlayerController _videoPlayerController;
   // String text = '';
   // String subject = '';
-  // String uri = '';
+
 
   @override
   void dispose() {
@@ -28,47 +29,52 @@ class _VideoPageState extends State<VideoPage> {
 
   void _openModal() {
     showModalBottomSheet<void>(
+      isScrollControlled: true,
+        isDismissible: false,
+        enableDrag: false,
         context: context,
         builder: (context) {
-          return Center(
-            child: Container(
-              height: 500,
-              color: Colors.black12,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                //  crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Edit video',
-                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24.0),
-                  ),
-                  const Divider(color: Colors.blueGrey,),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.ac_unit, size: 46, color: Colors.deepPurple),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.access_alarm_outlined, size: 46, color: Colors.deepPurple),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.accessibility_new_outlined, size: 46, color: Colors.deepPurple),
-                      ),
-                    ],
-                  ),
-                  const Divider(color: Colors.blueGrey,),
-                  ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Close'))
-                ],
-              ),
-            ),
-          );
+          // return Center(
+          //   child: Container(
+          //     height: 500,
+          //     color: Colors.black12,
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       mainAxisSize: MainAxisSize.min,
+          //       //  crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         const Text(
+          //           'Edit video',
+          //           style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24.0),
+          //         ),
+          //         const Divider(color: Colors.blueGrey,),
+          //         const Row(
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           children: [
+          //             Padding(
+          //               padding: EdgeInsets.all(8.0),
+          //               child: Icon(Icons.ac_unit, size: 46, color: Colors.deepPurple),
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.all(8.0),
+          //               child: Icon(Icons.access_alarm_outlined, size: 46, color: Colors.deepPurple),
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.all(8.0),
+          //               child: Icon(Icons.accessibility_new_outlined, size: 46, color: Colors.deepPurple),
+          //             ),
+          //           ],
+          //         ),
+          //         const Divider(color: Colors.blueGrey,),
+          //         ElevatedButton(
+          //             onPressed: () => Navigator.pop(context),
+          //             child: const Text('Close'))
+          //       ],
+          //     ),
+          //   ),
+          // );
+          return Center();
+
         }
     );
   }
@@ -100,6 +106,17 @@ class _VideoPageState extends State<VideoPage> {
     );
   }
 
+  _editVideo() async {
+    if (widget.filePath.isNotEmpty) {
+      File file = File(widget.filePath);
+      final route = MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (_) => VideoEditor(file: file));
+      if (!mounted) return;
+      Navigator.push(context, route);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +127,7 @@ class _VideoPageState extends State<VideoPage> {
         actions: [
           IconButton(
               icon: const Icon(Icons.video_settings_outlined, color: Colors.white, size: 32,),
-              onPressed: () => _openModal()
+              onPressed: () => _editVideo()
           ),
           const SizedBox(width: 6,),
           IconButton(

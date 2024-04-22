@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_teleprompter/camera_page.dart';
+import 'package:supabase_teleprompter/settings_page.dart';
+import 'package:supabase_teleprompter/temp_video_history.dart';
 
 import 'custom_widgets/action_button.dart';
 import 'custom_widgets/expandable_fab_sunray.dart';
@@ -76,11 +78,19 @@ class LandingScreen extends StatelessWidget {
         distance: 112,
         children: [
           ActionButton(
-            onPressed: () => _showAction(context, 0),
+            onPressed: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const SettingsPage()));
+    }, //_showAction(context, 0),
             icon: const Icon(Icons.settings),
           ),
           ActionButton(
-            onPressed: () => _showAction(context, 1),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TempVideoHistory()));
+            },//_showAction(context, 1),
             icon: const Icon(Icons.history_outlined),
           ),
           ActionButton(
