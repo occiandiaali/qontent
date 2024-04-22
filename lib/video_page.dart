@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:share_extend/share_extend.dart';
 
 class VideoPage extends StatefulWidget {
   final String filePath;
@@ -79,6 +80,26 @@ class _VideoPageState extends State<VideoPage> {
     await _videoPlayerController.play();
   }
 
+  void _getUpgrade(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: const Text(
+              'Upgrade to Premium to save your videos.',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 26, color: Colors.redAccent),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('CLOSE'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,18 +112,17 @@ class _VideoPageState extends State<VideoPage> {
               icon: const Icon(Icons.video_settings_outlined, color: Colors.white, size: 32,),
               onPressed: () => _openModal()
           ),
+          const SizedBox(width: 6,),
           IconButton(
             icon: const Icon(Icons.share_outlined, color: Colors.white, size: 32),
-            onPressed: () => _openModal()
+            onPressed: () => ShareExtend.share(widget.filePath, 'video')
           ),
+          const SizedBox(width: 6),
           IconButton(
             icon: const Icon(Icons.save_outlined, color: Colors.white,size: 32),
-            onPressed: () {
-              if (kDebugMode) {
-                print('do something with file...');
-              }
-            },
+            onPressed: () => _getUpgrade(context),
           ),
+          const SizedBox(width: 12,)
         ],
       ),
       extendBodyBehindAppBar: true,

@@ -37,6 +37,7 @@ dependencies:
   flutter_lorem:
   flutter_document_picker:
   syncfusion_flutter_pdf:
+  share_extend:
 
 
   # The following adds the Cupertino Icons font to your application.
