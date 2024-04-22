@@ -1,14 +1,19 @@
+import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:supabase_teleprompter/custom_widgets/script_overlay.dart';
+import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
+import 'package:supabase_teleprompter/custom_widgets/video_script_scroll.dart';
+//import 'package:supabase_teleprompter/custom_widgets/script_overlay.dart';
 import 'package:supabase_teleprompter/main.dart';
 import 'package:supabase_teleprompter/video_page.dart';
-import 'package:text_scroll/text_scroll.dart';
+//import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
+
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -22,6 +27,34 @@ class _CameraPageState extends State<CameraPage> {
   bool _isRecording = false;
   late CameraController _cameraController;
   //final isDialOpen = ValueNotifier(false);
+
+  String _pickedFilePath = '';
+  String videoScript = '';
+
+  Future<void> pickDoc() async {
+    final path = await FlutterDocumentPicker.openDocument(
+      params: FlutterDocumentPickerParams(
+        allowedFileExtensions: ['pdf'],
+        invalidFileNameSymbols: ['/']
+      )
+    );
+    if (kDebugMode) {
+      print('InputFilePath: $path');
+    }
+    if (path != null) {
+      setState(() {
+        _pickedFilePath = path;
+      });
+    }
+  }
+
+  void setVideoScript() {
+    pickDoc();
+    final PdfDocument document =
+        PdfDocument(inputBytes: File(_pickedFilePath).readAsBytesSync());
+    videoScript = PdfTextExtractor(document).extractText();
+    document.dispose();
+  }
 
   @override
   void initState() {
@@ -47,6 +80,7 @@ class _CameraPageState extends State<CameraPage> {
     if (_isRecording) {
       final file = await _cameraController.stopVideoRecording();
       setState(() => _isRecording = false);
+      setState(() => _pickedFilePath = '');
       final route = MaterialPageRoute(
           fullscreenDialog: true,
           builder: (_) => VideoPage(filePath: file.path));
@@ -65,32 +99,7 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
-    String val = '''
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-bunch of text here bunch of text here
-''';
+   // String loremText = lorem(paragraphs: 5, words: 200);
     if (_isLoading) {
       return Container(
         color: Colors.white,
@@ -107,17 +116,17 @@ bunch of text here bunch of text here
                 _cameraController,
               child: Offstage(
                 offstage: !_isRecording,
-                // child: TextScroll(
-                //   val,
-                //   mode: TextScrollMode.endless,
-                //   velocity: const Velocity(pixelsPerSecond: Offset(150,0)),
-                //   delayBefore: const Duration(milliseconds: 500),
-                //   numberOfReps: 5,
-                //   pauseBetween: const Duration(milliseconds: 50),
-                //   style: const TextStyle(
-                //       color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 38),
-                // )
-                child: const ScriptOverlay(),
+               child: ScrollLoopAutoScroll(
+                 scrollDirection: Axis.vertical,
+                 gap: 50,
+                 delay: Duration(seconds: 35),
+                 duration: Duration(minutes: 50),
+                 child: Text(videoScript,
+                   textAlign: TextAlign.center,
+                   style: const TextStyle(
+                       color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),),
+               ),
+               // child: const ScriptOverlay(),
               ),
             ),
             Positioned(
@@ -147,21 +156,28 @@ bunch of text here bunch of text here
                     //  openCloseDial: isDialOpen,
                       children: [
                         SpeedDialChild(
-                          child: Icon(_isRecording ? Icons.stop : Icons.video_camera_front_outlined),
+                          child: Icon(_isRecording ? Icons.stop : Icons.fiber_manual_record_rounded),
                           label: _isRecording ? 'Stop video' : 'Record video',
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.deepOrange,
+                          visible: videoScript != '',
                           onTap: () => _recordVideo(),
                         ),
                         SpeedDialChild(
                           child: const Icon(Icons.file_open_sharp),
                           label: 'Add script',
                           backgroundColor: Colors.green,
+                          visible: videoScript == '',
+                          onTap: () => setVideoScript()
                         ),
                         SpeedDialChild(
                             child: const Icon(Icons.delete_outline),
                             label: 'Remove script',
-                          backgroundColor: Colors.deepOrange,
-                          onTap: () {},
+                          backgroundColor: Colors.red,
+                            visible: videoScript != '',
+                            onTap: () => setState(() {
+                              _pickedFilePath = '';
+                              videoScript = '';
+                            })
                         ),
                       ],
                     ),

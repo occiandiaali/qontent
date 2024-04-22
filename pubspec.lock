@@ -206,6 +206,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_document_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_document_picker
+      sha256: "5229e22fb9ac7939c516b56736714bb92305762cf4027f34aaf9edda229c5004"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -214,6 +222,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_lorem:
+    dependency: "direct main"
+    description:
+      name: flutter_lorem
+      sha256: "004e1af5b030b632628d8cc1eb2f90451f48b6c0080f43069f69baa4959e9fe5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -256,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.4"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -328,6 +352,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.2"
   pigeon:
     dependency: transitive
     description:
@@ -352,6 +384,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  scroll_loop_auto_scroll:
+    dependency: "direct main"
+    description:
+      name: scroll_loop_auto_scroll
+      sha256: "83645b380c58c9dac2a9948b11a6b09149a2aebd18a7ca25bbf3be3c89dbbbff"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -397,6 +437,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "8e19260d292ed77e1cbd4ee1baafb3c9486079cad856e7891478131d25076039"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.1.40"
+  syncfusion_flutter_pdf:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_pdf
+      sha256: "388aed513e37eb48e665c466c79dd28b47356260aa7f8d4dbb5015fe4e98a42b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.1.40"
   term_glyph:
     dependency: transitive
     description:
@@ -413,14 +469,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
-  text_scroll:
-    dependency: "direct main"
-    description:
-      name: text_scroll
-      sha256: "7869d86a6fdd725dee56bdd150216a99f0372b82fbfcac319214dbd5f36e1908"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   typed_data:
     dependency: transitive
     description:
@@ -501,6 +549,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.0"
   yaml:
     dependency: transitive
     description:

@@ -32,8 +32,11 @@ dependencies:
     sdk: flutter
   camera:
   video_player:
-  text_scroll:
+  scroll_loop_auto_scroll: ^0.0.5
   flutter_speed_dial: ^7.0.0
+  flutter_lorem:
+  flutter_document_picker:
+  syncfusion_flutter_pdf:
 
 
   # The following adds the Cupertino Icons font to your application.

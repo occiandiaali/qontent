@@ -88,11 +88,15 @@ class _VideoPageState extends State<VideoPage> {
         backgroundColor: Colors.black26,
         actions: [
           IconButton(
-            icon: const Icon(Icons.share_outlined, color: Colors.white, size: 34,),
+              icon: const Icon(Icons.video_settings_outlined, color: Colors.white, size: 32,),
+              onPressed: () => _openModal()
+          ),
+          IconButton(
+            icon: const Icon(Icons.share_outlined, color: Colors.white, size: 32),
             onPressed: () => _openModal()
           ),
           IconButton(
-            icon: const Icon(Icons.save_outlined, color: Colors.white,size: 34,),
+            icon: const Icon(Icons.save_outlined, color: Colors.white,size: 32),
             onPressed: () {
               if (kDebugMode) {
                 print('do something with file...');
@@ -112,7 +116,7 @@ class _VideoPageState extends State<VideoPage> {
                 return VideoPlayer(_videoPlayerController);
               }
             }),
-        onTap: () => _openModal(),
+       // onTap: () => _openModal(),
       ),
     );
   }
