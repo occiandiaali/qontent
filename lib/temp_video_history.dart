@@ -8,13 +8,40 @@ class TempVideoHistory extends StatefulWidget {
 }
 
 class _TempVideoHistoryState extends State<TempVideoHistory> {
+  _openModal () {
+    showModalBottomSheet<void>(
+        isScrollControlled: true,
+        // isDismissible: false,
+        // enableDrag: false,
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - 400,
+            child: Column(
+              children: [
+                Image.asset(
+                  width: 150,
+                  height: 150,
+                  "assets/images/app_logo_light.png", fit: BoxFit.cover,),
+                const SizedBox(height: 24.0,),
+                const Text('Page Feature Modal', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),),
+                const Text('Content Here..')
+              ],
+            ),
+          );
+
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => _openModal(),
               icon: const Icon(Icons.more_vert_outlined))
         ],
       ),

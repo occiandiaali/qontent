@@ -316,6 +316,11 @@ class _CameraPageState extends State<CameraPage> {
             title: const Text('Generate AI script', style: TextStyle(fontWeight: FontWeight.w900),),
             content: Column(
               children: [
+                Image.asset(
+                  width: 150,
+                  height: 150,
+                  "assets/images/app_logo_light.png", fit: BoxFit.cover,),
+                const SizedBox(height: 14.0,),
                 const Text(
                     'Only Premium subscribers can access AI assistant',
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24, color: Colors.purple),
