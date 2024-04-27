@@ -29,24 +29,24 @@ class MyApp extends StatelessWidget {
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
 
-  static const _actionTitles = ['Create Post', 'Upload Photo', 'Upload Video'];
+ // static const _actionTitles = ['Create Post', 'Upload Photo', 'Upload Video'];
 
-  void _showAction(BuildContext context, int index) {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text(_actionTitles[index]),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('CLOSE'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // void _showAction(BuildContext context, int index) {
+  //   showDialog<void>(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         content: Text(_actionTitles[index]),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () => Navigator.of(context).pop(),
+  //             child: const Text('CLOSE'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
