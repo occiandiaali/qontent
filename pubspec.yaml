@@ -34,7 +34,6 @@ dependencies:
   video_player:
   scroll_loop_auto_scroll: ^0.0.5
   flutter_speed_dial: ^7.0.0
-  flutter_lorem:
   flutter_document_picker:
   syncfusion_flutter_pdf:
   share_extend:

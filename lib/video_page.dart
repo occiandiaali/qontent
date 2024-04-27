@@ -34,46 +34,7 @@ class _VideoPageState extends State<VideoPage> {
         enableDrag: false,
         context: context,
         builder: (context) {
-          // return Center(
-          //   child: Container(
-          //     height: 500,
-          //     color: Colors.black12,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       mainAxisSize: MainAxisSize.min,
-          //       //  crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         const Text(
-          //           'Edit video',
-          //           style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24.0),
-          //         ),
-          //         const Divider(color: Colors.blueGrey,),
-          //         const Row(
-          //           mainAxisAlignment: MainAxisAlignment.start,
-          //           children: [
-          //             Padding(
-          //               padding: EdgeInsets.all(8.0),
-          //               child: Icon(Icons.ac_unit, size: 46, color: Colors.deepPurple),
-          //             ),
-          //             Padding(
-          //               padding: EdgeInsets.all(8.0),
-          //               child: Icon(Icons.access_alarm_outlined, size: 46, color: Colors.deepPurple),
-          //             ),
-          //             Padding(
-          //               padding: EdgeInsets.all(8.0),
-          //               child: Icon(Icons.accessibility_new_outlined, size: 46, color: Colors.deepPurple),
-          //             ),
-          //           ],
-          //         ),
-          //         const Divider(color: Colors.blueGrey,),
-          //         ElevatedButton(
-          //             onPressed: () => Navigator.pop(context),
-          //             child: const Text('Close'))
-          //       ],
-          //     ),
-          //   ),
-          // );
-          return Center();
+          return const Center();
 
         }
     );

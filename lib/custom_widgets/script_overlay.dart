@@ -3,21 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class ScriptOverlay extends StatefulWidget {
-  // const ScriptOverlay({super.key, required this.videoScript});
+   const ScriptOverlay({super.key, required this.videoScript});
   //
-  // final String videoScript;
-  const ScriptOverlay({super.key});
+   final String videoScript;
+ // const ScriptOverlay({super.key});
 
   @override
   State<ScriptOverlay> createState() => _ScriptOverlayState();
 }
 
 class _ScriptOverlayState extends State<ScriptOverlay> {
-  final ScrollController _scrollController = ScrollController();
+  final _scrollController = ScrollController();
   bool scroll = false;
   int speedFactor = 20;
 
-  void _scroll() {
+  _scroll() {
     double maxExtent = _scrollController.position.maxScrollExtent;
     double distanceDiff = maxExtent - _scrollController.offset;
     double durationDouble = distanceDiff / speedFactor;
@@ -93,15 +93,31 @@ bunch of text here bunch of text here
             scrollDirection: Axis.vertical,
               child: Container(
                 padding: const EdgeInsets.all(8.0),
-                width: MediaQuery.of(context).size.width - 10,
-                height: MediaQuery.of(context).size.height - 200,
-                decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.black.withOpacity(0.4)),
                 child: Text(
-                  // widget.videoScript,
-                  textAlign: TextAlign.center,
-                  val,
-                  maxLines: 500,
-                  style: const TextStyle(color: Colors.white, fontSize: 34.0, fontWeight: FontWeight.bold),
+                  """
+                  
+                  
+                  ${widget.videoScript}
+                  """,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.fade,
+                 // maxLines: 500,
+                  style: const TextStyle(
+                      shadows: [
+                        Shadow(
+                            color: Colors.black,
+                            blurRadius: 2.0,
+                            offset: Offset(2.0, 2.0)
+                        )
+                      ],
+                      color: Colors.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold),
                 ),
               )
 
