@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:video_editor/video_editor.dart';
 
+import 'crop_page.dart';
+
 class VideoEditor extends StatefulWidget {
   const VideoEditor({super.key, required this.file});
 
@@ -17,7 +19,7 @@ class _VideoEditorState extends State<VideoEditor> {
   final _isExporting = ValueNotifier<bool>(false);
   final double height = 60;
 
-  late final VideoEditorController _controller = VideoEditorController.file(
+  late final _controller = VideoEditorController.file(
     widget.file,
     minDuration: const Duration(seconds: 1),
     maxDuration: const Duration(seconds: 10),
@@ -58,13 +60,6 @@ class _VideoEditorState extends State<VideoEditor> {
 
     final config = VideoFFmpegVideoEditorConfig(
       _controller,
-      // format: VideoExportFormat.gif,
-      // commandBuilder: (config, videoPath, outputPath) {
-      //   final List<String> filters = config.getExportFilters();
-      //   filters.add('hflip'); // add horizontal flip
-
-      //   return '-i $videoPath ${config.filtersCmd(filters)} -preset ultrafast $outputPath';
-      // },
     );
 
     // await ExportService.runFFmpegCommand(
@@ -278,7 +273,8 @@ class _VideoEditorState extends State<VideoEditor> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (context) => CropGridViewer.preview(controller: _controller) //CropPage(controller: _controller),
+                    builder: (context) => CropPage(controller: _controller),
+                      //CropGridViewer.preview(controller: _controller) //
                   ),
                 ),
                 icon: const Icon(Icons.crop, color: Colors.yellow),

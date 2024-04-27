@@ -41,6 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.purple[100],
       appBar: AppBar(
         actions: [
           IconButton(
@@ -69,6 +70,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   trailing: Icon(Icons.chevron_right_rounded),
                 ),
                 const ListTile(
+                  leading: Icon(Icons.cable_outlined),
+                  title: Text('Connected Apps'),
+                  trailing: Icon(Icons.chevron_right_rounded),
+                ),
+                const ListTile(
                   leading: Icon(Icons.lock_outline),
                   title: Text('Confidentiality'),
                   trailing: Icon(Icons.chevron_right_rounded),
@@ -80,7 +86,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 ListTile(
                     leading: const Icon(Icons.dark_mode_outlined),
-                    title: const Text('Notifications'),
+                    title: const Text('Dark Mode'),
                     trailing: Switch(
                         value: _darkMode,
                         onChanged: (value) => setState(() => _darkMode = value))

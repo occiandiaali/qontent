@@ -383,7 +383,6 @@ class _CameraPageState extends State<CameraPage> {
   int countScriptWords(String script) {
     var regExp = RegExp(r"\w+(\'\w+)?");
     int count = regExp.allMatches(script).length;
-    // int count = WordCount.countWords(script);
     return count;
   }
 
@@ -472,38 +471,38 @@ class _CameraPageState extends State<CameraPage> {
                 _cameraController,
                 child: Offstage(
                   offstage: !_isRecording,
-                  // child: ScrollLoopAutoScroll(
-                  //   duplicateChild: 1,
-                  //   scrollDirection: Axis.vertical,
-                  //   gap: 50,
-                  //   delay: Duration(minutes: 1),
-                  //   duration: Duration(
-                  //       minutes: countScriptWords(videoScript) > 100 ? 40 : 60),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: Text(
-                  //       """
-                  //
-                  //
-                  //
-                  //      $videoScript
-                  //    """,
-                  //       textAlign: TextAlign.center,
-                  //       overflow: TextOverflow.fade,
-                  //       style: const TextStyle(
-                  //           shadows: [
-                  //             Shadow(
-                  //                 color: Colors.black,
-                  //                 blurRadius: 2.0,
-                  //                 offset: Offset(2.0, 2.0)
-                  //             )
-                  //           ],
-                  //           color: Colors.white,
-                  //           fontSize: 36,
-                  //           fontWeight: FontWeight.bold),),
-                  //   ),
-                  // ),
-                   child: ScriptOverlay(videoScript: videoScript),
+                  child: ScrollLoopAutoScroll(
+                    duplicateChild: 1,
+                    scrollDirection: Axis.vertical,
+                    gap: 50,
+                    delay: Duration(seconds: 5),
+                    duration: Duration(
+                        seconds: countScriptWords(videoScript) < 200 ? 20 : 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        """
+                        
+                        
+                        
+                       $videoScript
+                        """,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.fade,
+                        style: const TextStyle(
+                            shadows: [
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 2.0,
+                                  offset: Offset(2.0, 2.0)
+                              )
+                            ],
+                            color: Colors.white,
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                  // child: ScriptOverlay(videoScript: videoScript),
                 ),
               ),
               Positioned(

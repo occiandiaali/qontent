@@ -61,19 +61,6 @@ class LandingScreen extends StatelessWidget {
           ),
         ),
       ),
-      // floatingActionButton: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: FloatingActionButton(
-      //       backgroundColor: Colors.deepOrange,
-      //       child: const Icon(Icons.camera),
-      //       onPressed: () {
-      //         Navigator.push(
-      //           context,
-      //             MaterialPageRoute(builder: (context) => const CameraPage())
-      //         );
-      //       }
-      //   ),
-      // ),
       floatingActionButton: ExpandableFab(
         distance: 112,
         children: [

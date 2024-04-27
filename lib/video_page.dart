@@ -114,7 +114,6 @@ class _VideoPageState extends State<VideoPage> {
                 return VideoPlayer(_videoPlayerController);
               }
             }),
-       // onTap: () => _openModal(),
       ),
     );
   }
